@@ -9,7 +9,7 @@ import { ParseDataComponent } from './parseData.component';
   templateUrl: 'diagnosticForm.component.html',
 })
 export class DiagnosticFormComponent implements OnInit {
-  public isLinear = false;
+  public isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   public labs = [
