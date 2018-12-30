@@ -24,8 +24,9 @@ export class DiagnosticFormComponent implements OnInit {
     { label: 'Diagnostic Lab', key: 'dl' },
     { label: 'Diagnostic Lab ID', key: 'dlid' },
     { label: 'Total Diagnostic types', key: 'total' },
-  ]
+  ];
   public readonly cols = ['dl', 'dlid', 'total'];
+  public isDisabled = true;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -41,19 +42,20 @@ export class DiagnosticFormComponent implements OnInit {
     });
     this.firstFormGroup.controls.diagnosticLabVal.valueChanges.subscribe(selectedLab => {
       this.onSelectLabId(this.labs.find(obj => selectedLab === obj.value));
-    })
+    });
 
   }
 
   public onChooseFile(event) {
     this.secondFormGroup.controls.chooseFile.setValue(event.target.files[0].name);
+    this.isDisabled = false;
   }
 
   public onUpload(fileToUpload: HTMLInputElement) {
     const fileReader = new FileReader();
     fileReader.onload = () => {
       this.onFileLoad(fileReader.result as string);
-    }
+    };
     fileReader.readAsText(fileToUpload.files[0]);
 
   }
@@ -67,11 +69,11 @@ export class DiagnosticFormComponent implements OnInit {
     const dialogRef = this.dialog.open(ParseDataComponent, {
       width: '1000px',
       data
-    })
+    });
     dialogRef.afterClosed().subscribe(res => {
-      this.parsedDataCount = dialogRef.componentInstance && dialogRef.componentInstance.isConfirmed ? dialogRef.componentInstance.dataSource.length.toString() : '';
+      this.parsedDataCount = dialogRef.componentInstance && dialogRef.componentInstance.isConfirmed ?
+      dialogRef.componentInstance.dataSource.length.toString() : '';
       this.dataSource[0].total = this.parsedDataCount;
     });
   }
-
 }

@@ -6,7 +6,7 @@ import * as pparse from 'papaparse';
   selector: 'parse-data',
   templateUrl: 'parseData.component.html',
 })
-export class ParseDataComponent {
+export class ParseDataComponent implements OnInit {
   public displayedColumns: string[] = [];
   public headers = [];
   public dataSource = [];
@@ -20,7 +20,7 @@ export class ParseDataComponent {
   }
 
   public ngOnInit() {
-    this.dataSource = pparse.parse(this.data,{ header: true}).data;
+    this.dataSource = pparse.parse(this.data, { header: true}).data;
     this.headers = Object.keys(this.dataSource[0]);
   }
 

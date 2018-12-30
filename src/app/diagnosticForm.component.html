@@ -25,8 +25,8 @@
         <input #fileToUpload type="file" accept=".csv" style="display:none;" (change)="onChooseFile($event)">
       </mat-form-field>
       <div>
-        <button mat-button mat-raised-button (click)="onUpload(fileToUpload)">Upload</button>
-        <p>Total Diagnostics parsed: {{parsedDataCount}}</p>
+        <button mat-button mat-raised-button color="primary" (click)="onUpload(fileToUpload)" [disabled]="isDisabled">Upload</button>
+        <p *ngIf="dataSource[0].total">Total Diagnostics parsed: {{parsedDataCount}}</p>
       </div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button matStepperNext>Next</button>
@@ -47,7 +47,7 @@
    </table>
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-button>Save</button>
+      <button mat-raised-button color="warn">Save</button>
     </div>
   </mat-step>
 </mat-vertical-stepper>
